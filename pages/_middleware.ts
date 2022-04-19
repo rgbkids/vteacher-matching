@@ -22,12 +22,16 @@ export default function middleware(req: NextRequest) {
     return NextResponse.redirect("https://demo.vercel.pub");
   }
 
+  const appHost = hostname.split(".").reverse().pop();
+  const appWildcardDomain = hostname.replace(!!appHost ? appHost : "", "");
+
   const currentHost =
     process.env.NODE_ENV === "production" && process.env.VERCEL === "1"
       ? // You have to replace ".vercel.pub" with your own domain if you deploy this example under your domain.
         // You can use wildcard subdomains on .vercel.app links that are associated with your Vercel team slug
         // in this case, our team slug is "platformize", thus *.platformize.vercel.app works
         hostname
+          .replace(appWildcardDomain, "")
           .replace(`.vercel.pub`, "")
           .replace(`.platformize.vercel.app`, "")
       : hostname.replace(`.localhost:3000`, "");
@@ -38,7 +42,7 @@ export default function middleware(req: NextRequest) {
     });
 
   if (!pathname.includes(".") && !pathname.startsWith("/api")) {
-    if (currentHost == "app") {
+    if (currentHost == "app" || currentHost == appHost) {
       if (
         pathname === "/login" &&
         (req.cookies["next-auth.session-token"] ||
