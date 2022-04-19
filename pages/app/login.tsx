@@ -9,7 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 const pageTitle = "Login";
 const logo = "/favicon.ico";
 const description =
-  "Platforms Starter Kit is a comprehensive template for building multi-tenant applications with custom domains.";
+  "VTeacher matching is a comprehensive template for building multi-tenant applications with custom domains.";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -17,6 +17,42 @@ export default function Login() {
   // Get error message added by next/auth in URL.
   const { query } = useRouter();
   const { error } = query;
+
+  const [youtubers, setYoutubers] = useState<
+    [
+      {
+        no: number;
+        thumnail: string;
+        title: string;
+        description: string;
+        share: string;
+        udapte_date: string;
+        vteacher_preview: string;
+      }
+    ]
+  >([
+    {
+      no: -1,
+      thumnail: "",
+      title: "",
+      description: "",
+      share: "",
+      udapte_date: "",
+      vteacher_preview: "",
+    },
+  ]);
+
+  useEffect(() => {
+    const fetchYoutuber = async () => {
+      const response = await fetch(
+        "https://vteacher.online/v/api-get-youtubers.php?page=2&num=5"
+      );
+      const youtubers = await response.json();
+      setYoutubers(youtubers);
+    };
+    fetchYoutuber();
+  }, []);
+  console.log(youtubers);
 
   useEffect(() => {
     const errorMessage = Array.isArray(error) ? error.pop() : error;
@@ -54,14 +90,14 @@ export default function Login() {
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="relative mx-auto h-12 w-auto">
           <Image
-            alt="Platforms Starter Kit"
+            alt="VTeacher matching"
             layout="fill"
             objectFit="contain"
             src="/logo.png"
           />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Platforms Starter Kit
+          VTeacher matching!!!
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Build multi-tenant applications with custom domains. <br /> Read the{" "}
@@ -74,6 +110,46 @@ export default function Login() {
             blog post
           </a>
         </p>
+
+        <div>
+          <div>
+            {youtubers.map((youtuber) => (
+              <div className="bg-white py-6 sm:py-8 lg:py-12" key={youtuber.no}>
+                <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
+                  <div className="flex flex-col lg:flex-row lg:justify-between items-center bg-gray-100 rounded-lg p-4 sm:p-8">
+                    <div className="flex flex-col items-center lg:items-end">
+                      <p className="text-gray-400 text-xs text-center lg:text-right">
+                        {/* <Image
+                          alt="VTeacher matching"
+                          layout="fill"
+                          objectFit="contain"
+                          src={youtuber.thumnail}
+                        /> */}
+                        <a
+                          href="{youtuber.share}"
+                          className="hover:text-indigo-500 active:text-indigo-600 underline transition duration-100"
+                        >
+                          {youtuber.share}
+                        </a>
+                      </p>
+                    </div>
+                    <div className="mb-4 sm:mb-8 lg:mb-0">
+                      <a href="{youtuber.share}">
+                        <h2 className="hover:text-indigo-500 text-xl sm:text-2xl lg:text-3xl font-bold text-center lg:text-left">
+                          {youtuber.title}
+                        </h2>
+                      </a>
+                      <p className="text-gray-500 text-center lg:text-left">
+                        {youtuber.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              //<div key={youtuber.no}>{youtuber.title}</div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="mt-8 mx-auto sm:w-full w-11/12 sm:max-w-md">
