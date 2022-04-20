@@ -101,6 +101,8 @@ export default function Login() {
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           VTeacherを使ってライブ配信したチャンネルの最新リストです。
+        </p>
+        <p className="mt-2 text-center text-sm text-gray-600">
           気になるインフルエンサーにコンタクトがとれます。{" "}
         </p>
 
