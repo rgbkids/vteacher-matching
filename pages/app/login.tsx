@@ -45,14 +45,13 @@ export default function Login() {
   useEffect(() => {
     const fetchYoutuber = async () => {
       const response = await fetch(
-        "https://vteacher.online/v/api-get-youtubers.php?page=1&num=5"
+        "https://vteacher.online/v/api-get-youtubers.php?page=0&num=10"
       );
       const youtubers = await response.json();
       setYoutubers(youtubers);
     };
     fetchYoutuber();
   }, []);
-  console.log(youtubers);
 
   useEffect(() => {
     const errorMessage = Array.isArray(error) ? error.pop() : error;
@@ -109,17 +108,17 @@ export default function Login() {
         <div>
           <div>
             {youtubers.map((youtuber) => (
-              <div className="bg-white py-6 sm:py-8 lg:py-12" key={youtuber.no}>
-                <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
-                  <div className="flex flex-col lg:flex-row lg:justify-between items-center bg-gray-100 rounded-lg p-4 sm:p-8">
-                    <div className="flex flex-col items-center lg:items-end">
-                      <p className="text-gray-400 text-xs text-center lg:text-right">
-                        <Image
-                          src={youtuber.thumbnail}
-                          alt="VTeacher matching"
-                          width={200}
-                          height={200}
-                        />
+              <div className="bg-white py-6" key={youtuber.no}>
+                <div className="max-w-screen-2xl px-4 mx-auto">
+                  <div className="flex flex-col items-center bg-gray-100 rounded-lg p-4">
+                    <div className="flex flex-col items-center">
+                      <Image
+                        src={youtuber.thumbnail}
+                        alt="VTeacher matching"
+                        width={200}
+                        height={200}
+                      />
+                      <p className="text-gray-400 text-xs text-center">
                         <a
                           href={youtuber.share}
                           target="_blank"
@@ -130,13 +129,13 @@ export default function Login() {
                         </a>
                       </p>
                     </div>
-                    <div className="mb-4 sm:mb-8 lg:mb-0">
+                    <div className="mb-4">
                       <a href={youtuber.share} target="_blank" rel="noreferrer">
-                        <h2 className="hover:text-indigo-500 text-xl sm:text-2xl lg:text-3xl font-bold text-center lg:text-left">
+                        <h2 className="hover:text-indigo-500 text-xl font-bold text-center">
                           {youtuber.title}
                         </h2>
                       </a>
-                      <p className="text-gray-500 text-center lg:text-left">
+                      <p className="text-gray-500 text-center">
                         {youtuber.description}
                       </p>
                     </div>
