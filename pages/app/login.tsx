@@ -22,7 +22,7 @@ export default function Login() {
     [
       {
         no: number;
-        thumnail: string;
+        thumbnail: string;
         title: string;
         description: string;
         share: string;
@@ -33,7 +33,7 @@ export default function Login() {
   >([
     {
       no: -1,
-      thumnail: "",
+      thumbnail: "https://vteacher.online/v/template/user/preview.png",
       title: "",
       description: "",
       share: "",
@@ -45,7 +45,7 @@ export default function Login() {
   useEffect(() => {
     const fetchYoutuber = async () => {
       const response = await fetch(
-        "https://vteacher.online/v/api-get-youtubers.php?page=2&num=5"
+        "https://vteacher.online/v/api-get-youtubers.php?page=1&num=5"
       );
       const youtubers = await response.json();
       setYoutubers(youtubers);
@@ -119,12 +119,12 @@ export default function Login() {
                   <div className="flex flex-col lg:flex-row lg:justify-between items-center bg-gray-100 rounded-lg p-4 sm:p-8">
                     <div className="flex flex-col items-center lg:items-end">
                       <p className="text-gray-400 text-xs text-center lg:text-right">
-                        {/* <Image
+                        <Image
+                          src={youtuber.thumbnail}
                           alt="VTeacher matching"
-                          layout="fill"
-                          objectFit="contain"
-                          src={youtuber.thumnail}
-                        /> */}
+                          width={200}
+                          height={200}
+                        />
                         <a
                           href="{youtuber.share}"
                           className="hover:text-indigo-500 active:text-indigo-600 underline transition duration-100"
