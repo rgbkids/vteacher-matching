@@ -97,18 +97,11 @@ export default function Login() {
           />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          VTeacher matching!!!
+          VTeacher Matching!!
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          Build multi-tenant applications with custom domains. <br /> Read the{" "}
-          <a
-            className="font-medium text-black hover:text-gray-800"
-            href="https://demo.vercel.pub/platforms-starter-kit"
-            rel="noreferrer"
-            target="_blank"
-          >
-            blog post
-          </a>
+          VTeacherを使ってライブ配信したチャンネルの最新リストです。
+          気になるインフルエンサーにコンタクトがとれます。{" "}
         </p>
 
         <div>
@@ -126,7 +119,9 @@ export default function Login() {
                           height={200}
                         />
                         <a
-                          href="{youtuber.share}"
+                          href={youtuber.share}
+                          target="_blank"
+                          rel="noreferrer"
                           className="hover:text-indigo-500 active:text-indigo-600 underline transition duration-100"
                         >
                           {youtuber.share}
@@ -134,7 +129,7 @@ export default function Login() {
                       </p>
                     </div>
                     <div className="mb-4 sm:mb-8 lg:mb-0">
-                      <a href="{youtuber.share}">
+                      <a href={youtuber.share} target="_blank" rel="noreferrer">
                         <h2 className="hover:text-indigo-500 text-xl sm:text-2xl lg:text-3xl font-bold text-center lg:text-left">
                           {youtuber.title}
                         </h2>
@@ -146,7 +141,6 @@ export default function Login() {
                   </div>
                 </div>
               </div>
-              //<div key={youtuber.no}>{youtuber.title}</div>
             ))}
           </div>
         </div>
