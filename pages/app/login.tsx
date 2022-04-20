@@ -26,7 +26,7 @@ export default function Login() {
         title: string;
         description: string;
         share: string;
-        udapte_date: string;
+        update_date: string;
         vteacher_preview: string;
       }
     ]
@@ -37,7 +37,7 @@ export default function Login() {
       title: "",
       description: "",
       share: "",
-      udapte_date: "",
+      update_date: "",
       vteacher_preview: "",
     },
   ]);
@@ -45,7 +45,7 @@ export default function Login() {
   useEffect(() => {
     const fetchYoutuber = async () => {
       const response = await fetch(
-        "https://vteacher.online/v/api-get-youtubers.php?page=0&num=10"
+        "https://vteacher.online/v/api-get-youtubers.php?page=0&num=20"
       );
       const youtubers = await response.json();
       setYoutubers(youtubers);
@@ -102,7 +102,7 @@ export default function Login() {
           VTeacherを使ってライブ配信したチャンネルの最新リストです。
         </p>
         <p className="mt-2 text-center text-sm text-gray-600">
-          気になるインフルエンサーにコンタクトがとれます。{" "}
+          気になるインフルエンサーにアプリからコンタクトがとれます。{" "}
         </p>
 
         <div>
@@ -111,6 +111,9 @@ export default function Login() {
               <div className="bg-white py-6" key={youtuber.no}>
                 <div className="max-w-screen-2xl px-4 mx-auto">
                   <div className="flex flex-col items-center bg-gray-100 rounded-lg p-4">
+                    <p className="text-gray-500 text-center">
+                      配信日:{youtuber.update_date}
+                    </p>
                     <div className="flex flex-col items-center">
                       <Image
                         src={youtuber.thumbnail}
