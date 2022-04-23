@@ -45,7 +45,7 @@ export default function Login() {
   useEffect(() => {
     const fetchYoutuber = async () => {
       const response = await fetch(
-        "https://vteacher.online/v/api-get-youtubers.php?page=0&num=20"
+        "https://vteacher.online/v/api-get-youtubers.php?page=0&num=10"
       );
       const youtubers = await response.json();
       setYoutubers(youtubers);
@@ -59,7 +59,7 @@ export default function Login() {
   }, [error]);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-0 sm:px-6 lg:px-8">
       <Head>
         <title>{pageTitle}</title>
         <link rel="icon" href={logo} />
@@ -87,22 +87,18 @@ export default function Login() {
         <meta name="twitter:image" content={logo} />
       </Head>
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="relative mx-auto h-12 w-auto">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           <Image
             alt="VTeacher matching"
-            layout="fill"
-            objectFit="contain"
+            width={32}
+            height={32}
             src="/logo.png"
-          />
-        </div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          VTeacher Matching!!
+          />{" "}
+          Matching
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          VTeacherを使ってライブ配信したチャンネルの最新リストです。
-        </p>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          気になるインフルエンサーにアプリからコンタクトがとれます。{" "}
+        <p className="mt-2 sm:text-center text-sm text-gray-600 p-5">
+          VTeacherを使って配信したチャンネルの最新リストです。
+          スポンサーを申し出たい場合はアプリからコンタクトがとれます。
         </p>
 
         <div>
